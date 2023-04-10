@@ -1,5 +1,3 @@
-import numpy as np
-
 import sqlalchemy
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
@@ -9,14 +7,14 @@ from flask import Flask, jsonify
 
 
 # Database Setup
-# Try with both paths in case you cannot read the data
-engine = create_engine("sqlite:///C:/Users/sarai/Desktop/UTA/Projects/OPIOID/opioid_project_3/Resources/opioid_db.sqlite")
+# Using relative path to connect to the database
+engine = create_engine("sqlite:///Resources/opioid_db.sqlite")
 
 # reflect an existing database into a new model
 Base = automap_base()
 
 # reflect the tables
-Base.prepare(engine, reflect=True)
+Base.prepare(autoload_with=engine, reflect=True)
 
 # Save reference to the table
 opioid = Base.classes.opioid_ems_calls
@@ -38,7 +36,8 @@ def welcome():
         f"/api/v1.0/patient_gender<br/>"
         f"/api/v1.0/patient_ASU<br/>"
         f"/api/v1.0/patient_veteran<br/>"
-        f"/api/v1.0/patient_homeless"      
+        f"/api/v1.0/patient_homeless<br/>"
+        f"/api/v1.0/patient_none"
     )
 
 @app.route("/api/v1.0/patient_gender")
@@ -46,30 +45,48 @@ def patient_gender():
     # Create our session (link) from Python to the DB
     session = Session(engine)
 
-    """Return a list of all passenger names"""
-    # Query all passengers
-    results = session.query(opioid.Patient_Gender).all()
+    """Return all list of records for all patients (no filtering)"""
+    # Query all patients
+    results = session.query(opioid.Age, opioid.Weekday, opioid.Year, opioid.Patient_Gender, opioid.Spec_Pop).all()
 
     session.close()
 
-    # Convert list of tuples into normal list
-    all_genders = list(np.ravel(results))
+    # Create list of dictionaries for each patient
+    all_gender = []
+    for age, weekday, year, gender, spec_pop in results:
+        gender_dict = {
+            'Age Bracket': age,
+            'Weekday': weekday,
+            'Year': year,
+            'Gender': gender,
+            'Spec_Pop': spec_pop
+        }
+        all_gender.append(gender_dict)
 
-    return jsonify(all_genders)
+    return jsonify(all_gender)
 
 @app.route("/api/v1.0/patient_ASU")
 def patient_student():
     # Create our session (link) from Python to the DB
     session = Session(engine)
 
-    """Return a list of all passenger names"""
-    # Query all passengers
-    results = session.query(opioid.Patient_ASU).all()
+    """Return a list of records for all ASU students"""
+    # Query to get all ASU students
+    results = session.query(opioid.Age, opioid.Weekday, opioid.Year, opioid.Spec_Pop)\
+        .filter_by(Spec_Pop = 'ASU Student').all()
 
     session.close()
 
-    # Convert list of tuples into normal list
-    all_students= list(np.ravel(results))
+    # Create list of dictionaries for each student
+    all_students = []
+    for age, weekday, year, spec_pop in results:
+        student_dict = {
+            'Age Bracket': age,
+            'Weekday': weekday,
+            'Year': year,
+            'Spec_Pop': spec_pop
+        }
+        all_students.append(student_dict)
 
     return jsonify(all_students)
 
@@ -78,14 +95,23 @@ def veteran():
     # Create our session (link) from Python to the DB
     session = Session(engine)
 
-    """Return a list of all passenger names"""
-    # Query all passengers
-    results = session.query(opioid.Patient_Veteran).all()
+    """Return a list of records for all Veterans"""
+    # Query all veterans
+    results = session.query(opioid.Age, opioid.Weekday, opioid.Year, opioid.Spec_Pop)\
+        .filter_by(Spec_Pop = 'Veteran').all()
 
     session.close()
 
-    # Convert list of tuples into normal list
-    all_veterans= list(np.ravel(results))
+    # Create list of dictionaries for each veteran
+    all_veterans = []
+    for age, weekday, year, spec_pop in results:
+        veteran_dict = {
+            'Age Bracket': age,
+            'Weekday': weekday,
+            'Year': year,
+            'Spec_Pop': spec_pop
+        }
+        all_veterans.append(veteran_dict)
 
     return jsonify(all_veterans)
 
@@ -94,41 +120,50 @@ def homeless():
     # Create our session (link) from Python to the DB
     session = Session(engine)
 
-    """Return a list of all passenger names"""
-    # Query all passengers
-    results = session.query(opioid.Patient_Homeless).all()
+    """Return a list of records for all Homeless"""
+    # Query all homeless
+    results = session.query(opioid.Age, opioid.Weekday, opioid.Year, opioid.Spec_Pop)\
+        .filter_by(Spec_Pop = 'Homeless').all()
 
     session.close()
 
-    # Convert list of tuples into normal list
-    all_homeless = list(np.ravel(results))
+    # Create list of records for each homeless
+    all_homeless = []
+    for age, weekday, year, spec_pop in results:
+        homeless_dict = {
+            'Age Bracket': age,
+            'Weekday': weekday,
+            'Year': year,
+            'Spec_Pop': spec_pop
+        }
+        all_homeless.append(homeless_dict)
 
     return jsonify(all_homeless)
 
-#*************************************
-#PENDING - do not delete (yet)
+@app.route("/api/v1.0/patient_none")
+def none_population():
+    # Create our session (link) from Python to the DB
+    session = Session(engine)
 
-# @app.route("/api/v1.0/passengers")
-# def passengers():
-#     # Create our session (link) from Python to the DB
-#     session = Session(engine)
+    """Return a list of records for patients who are not part of a special population"""
+    # Query all patients who are not part of a special population
+    results = session.query(opioid.Age, opioid.Weekday, opioid.Year, opioid.Spec_Pop)\
+        .filter((opioid.Spec_Pop != 'Homeless') | (opioid.Spec_Pop != 'Veteran') | (opioid.Spec_Pop != 'ASU Student')).all()
 
-#     """Return a list of passenger data including the name, age, and sex of each passenger"""
-#     # Query all passengers
-#     results = session.query(Passenger.name, Passenger.age, Passenger.sex).all()
+    session.close()
 
-#     session.close()
+    # Create list of records for each patient (no soecial population)
+    all_none_pop = []
+    for age, weekday, year, spec_pop in results:
+        none_pop_dict = {
+            'Age Bracket': age,
+            'Weekday': weekday,
+            'Year': year,
+            'Spec_Pop': spec_pop
+        }
+        all_none_pop.append(none_pop_dict)
 
-#     # Create a dictionary from the row data and append to a list of all_passengers
-#     all_passengers = []
-#     for name, age, sex in results:
-#         passenger_dict = {}
-#         passenger_dict["name"] = name
-#         passenger_dict["age"] = age
-#         passenger_dict["sex"] = sex
-#         all_passengers.append(passenger_dict)
-
-#     return jsonify(all_passengers)
+    return jsonify(all_none_pop)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=8000)
