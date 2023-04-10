@@ -3,19 +3,18 @@ import numpy as np
 import sqlalchemy
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
-from sqlalchemy import create_engine, func
-
+from sqlalchemy import create_engine
 
 from flask import Flask, jsonify
 
 
-#################################################
 # Database Setup
-#################################################
-engine = create_engine("sqlite:///Resources/opioid_database.sqlite")
+# Try with both paths in case you cannot read the data
+engine = create_engine("sqlite:///C:/Users/sarai/Desktop/UTA/Projects/OPIOID/opioid_project_3/Resources/opioid_db.sqlite")
 
 # reflect an existing database into a new model
 Base = automap_base()
+
 # reflect the tables
 Base.prepare(engine, reflect=True)
 
@@ -106,6 +105,8 @@ def homeless():
 
     return jsonify(all_homeless)
 
+#*************************************
+#PENDING - do not delete (yet)
 
 # @app.route("/api/v1.0/passengers")
 # def passengers():
