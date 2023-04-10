@@ -152,7 +152,7 @@ def none_population():
 
     session.close()
 
-    # Create list of records for each patient (no soecial population)
+    # Create list of records for each patient (no special population)
     all_none_pop = []
     for age, weekday, year, spec_pop in results:
         none_pop_dict = {
