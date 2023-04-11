@@ -8,7 +8,7 @@ from flask import Flask, jsonify
 
 # Database Setup
 # Using relative path to connect to the database
-engine = create_engine("sqlite:///opioid_project_3/Resources/opioid_db.sqlite")
+engine = create_engine("sqlite:///Resources/opioid_db.sqlite")
 
 # reflect an existing database into a new model
 Base = automap_base()
