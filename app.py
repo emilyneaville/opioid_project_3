@@ -33,15 +33,15 @@ def welcome():
     """List all available api routes."""
     return (
         f"Available Routes:<br/>"
-        f"/api/v1.0/patient_gender<br/>"
+        f"/api/v1.0/all_patient_info<br/>"
         f"/api/v1.0/patient_ASU<br/>"
         f"/api/v1.0/patient_veteran<br/>"
         f"/api/v1.0/patient_homeless<br/>"
         f"/api/v1.0/patient_none"
     )
 
-@app.route("/api/v1.0/patient_gender")
-def patient_gender():
+@app.route("/api/v1.0/all_patient_info")
+def patient_info():
     # Create our session (link) from Python to the DB
     session = Session(engine)
 
@@ -148,7 +148,7 @@ def none_population():
     """Return a list of records for patients who are not part of a special population"""
     # Query all patients who are not part of a special population
     results = session.query(opioid.Age, opioid.Weekday, opioid.Year, opioid.Spec_Pop)\
-        .filter((opioid.Spec_Pop != 'Homeless') | (opioid.Spec_Pop != 'Veteran') | (opioid.Spec_Pop != 'ASU Student')).all()
+        .filter_by(Spec_Pop = 'None').all()
 
     session.close()
 
