@@ -3,25 +3,28 @@
 function init(){ 
 
     // fetch the json data and console log it
-    d3.json(url).then(function(data){
+    d3.json(url).then(function(alldata){
         
         // display available data to work with
-        console.log(data);
+        console.log(alldata);
 
         // Use D3 to select the dropdown menu
         let dropdownMenu = d3.select("#selDataset");
 
         // getting all names from json
-        let names = alldata.Gender;
+        let spec_pop = alldata[0].Spec_Pop;
+
+        console.log(spec_pop);
+        console.log(alldata[0]);
 
         // getting dropdown 
-        names.forEach(function(id){
+        alldata.forEach(function(id){
             dropdownMenu.append("option").text(id).property("value");
         });
        
         // pass first subject and call the functions
-        chartvalues(names[0]);
-        metadata(names[0]);
+        chartvalues(spec_pop);
+        metadata(spec_pop);
     });
 };
 

@@ -2,8 +2,8 @@ import sqlalchemy
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
 from sqlalchemy import create_engine
-
 from flask import Flask, jsonify
+from flask_cors import CORS
 from flask_cors import CORS
 
 
@@ -15,7 +15,7 @@ engine = create_engine("sqlite:///Resources/opioid_db.sqlite")
 Base = automap_base()
 
 # reflect the tables
-Base.prepare(autoload_with=engine, reflect=True)
+Base.prepare(engine, reflect=True)
 
 # Save reference to the table
 opioid = Base.classes.opioid_ems_calls
@@ -24,6 +24,7 @@ opioid = Base.classes.opioid_ems_calls
 # Flask Setup
 #################################################
 app = Flask(__name__)
+CORS(app)
 
 #################################################
 # Flask Routes
@@ -68,6 +69,7 @@ def patient_info():
 
 @app.route("/api/v1.0/patient_ASU")
 def patient_student():
+    
     # Create our session (link) from Python to the DB
     session = Session(engine)
 
@@ -75,7 +77,6 @@ def patient_student():
     # Query to get all ASU students
     results = session.query(opioid.Age, opioid.Weekday, opioid.Year, opioid.Spec_Pop)\
         .filter_by(Spec_Pop = 'ASU Student').all()
-
     session.close()
 
     # Create list of dictionaries for each student
