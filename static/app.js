@@ -19,27 +19,44 @@ function init(){
                 .append("option")
                 .text(population)
                 .property("value");
+        
+        // Call the buildCharts function
+        buildCharts(population);
 
         });
     });
 };
 
 // Build the charts
-function buildCharts(population) {
+function buildCharts() {
 
     // Fetch the json data
     d3.json('http://127.0.0.1:8000/api/v1.0/all_patient_info').then(function(allData) {
 
-        // Filter the data for the selected special population
-        let patients = allData.filter(patient => patient.Spec_Pop == population);
+        // Console log the data
+        console.log(allData);
 
-        // Create a variable that holds the first patient in the array
-        let firstPatient = patients[0];
+        // Create a bar chart with the age brackets on the x-axis and the amount of patients for each
+        // .map with create an array with every single "Age Bracket" value in the dataset
+        let xValues = allData.map(function(data) {
+            return data["Age Bracket"]
+        });
 
-        // HOW TO MAKE X AND Y VALUES FOR THE BAR CHART???????
+        // Get the unique values from the Age Bracket
+        let uniqueXValues = xValues.filter((x, i, a) => a.indexOf(x) == i);
 
-        // Render the plot to the div tag with id "bar"
-        Plotly.newPlot("bar1", trace1, barLayout);
+        // Console log the Unique age bracket values array
+        console.log(uniqueXValues);
+        
+        // Create the bar chart
+        let trace1 = [{
+            x: uniqueXValues,
+            y: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21],
+            type: "bar"
+        }];
+
+        // Render the plot to the div tag with id "bar1"
+        Plotly.newPlot("bar1", trace1);
     });
 };
 
