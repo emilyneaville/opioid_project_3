@@ -15,7 +15,7 @@ engine = create_engine("sqlite:///Resources/opioid_db.sqlite")
 Base = automap_base()
 
 # reflect the tables
-Base.prepare(autoload_with=engine, reflect=True)
+Base.prepare(engine, reflect=True)
 
 # Save reference to the table
 opioid = Base.classes.opioid_ems_calls
@@ -24,6 +24,7 @@ opioid = Base.classes.opioid_ems_calls
 # Flask Setup
 #################################################
 app = Flask(__name__)
+CORS(app)
 
 #################################################
 # Flask Routes
