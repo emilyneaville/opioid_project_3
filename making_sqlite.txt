@@ -1,0 +1,34 @@
+(PythonData) Emilys-MacBook-Pro:~ emilyneaville$ sqlite3 opioid_db_renamed.db
+SQLite version 3.40.1 2022-12-28 14:03:47
+Enter ".help" for usage hints.
+sqlite> CREATE TABLE opioid_ems_calls (
+   ...> X REAL,
+   ...> Y REAL,
+   ...> OBJECTID INTEGER PRIMARY KEY,
+   ...> Incident_Date TEXT,
+   ...> Weekday TEXT,
+   ...> Weekday_Sort TEXT,
+   ...> Month TEXT,
+   ...> Month_Sort TEXT,
+   ...> Year INTEGER,
+   ...> Opioid_Use TEXT,
+   ...> Narcan_Given TEXT,
+   ...> Age TEXT,
+   ...> Patient_Gender TEXT,
+   ...> Patient_ASU TEXT,
+   ...> Patient_Veteran TEXT,
+   ...> Patient_Homeless TEXT,
+   ...> Latitude_Random REAL,
+   ...> Longitude_Random REAL,
+   ...> Notes TEXT,
+   ...> Time_of_Day TEXT,
+   ...> Spec_Pop TEXT
+   ...> );
+sqlite> .databases
+main: /Users/emilyneaville/opioid_db_renamed.db r/w
+sqlite> .tables
+opioid_ems_calls
+sqlite> .mode csv
+sqlite> .import /Users/emilyneaville/git_DA/opioid_project_3/Resources/opioid_ems_calls_cleaned.csv opioid_ems_calls
+sqlite> .exit
+(PythonData) Emilys-MacBook-Pro:~ emilyneaville$ 
