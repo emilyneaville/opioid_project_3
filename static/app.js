@@ -26,7 +26,7 @@ function init(){
         // Call the buildCharts function
         scatter_chart(population);
         bar_chart(population);
-        bubble_chart(population);
+        bar_chart2(population);
         });
     });
 };
@@ -35,7 +35,7 @@ function init(){
 function optionChanged(passedvalue) {
     scatter_chart(passedvalue);
     bar_chart(passedvalue);
-    bubble_chart(population);
+    bar_chart2(passedvalue);
 };
 
 // Build the line chart function 
@@ -173,7 +173,7 @@ function bar_chart(selectedPopulation) {
 };
 
 // Build the bubble chart function 
-function bubble_chart(selectedPopulation) {
+function bar_chart2(selectedPopulation) {
 
     // Fetch the json data
     d3.json(all_patient_info).then(allData=> {
@@ -181,89 +181,69 @@ function bubble_chart(selectedPopulation) {
         // Filter the data based on the selected population
         let filteredData = allData.filter(data => data.Spec_Pop === selectedPopulation);
         
-        // GET DAY OF WEEK
-        // Create an array for days of the week
-        let weekdays = filteredData.map(data => {
+        // get all days weekdays
+        let all_weekdays = filteredData.map(data => {
             return data.Weekday;
         });
-        console.log('weekdays', weekdays);
 
-        // Get the unique values from the allYears array
-        let uniquedays = weekdays.filter((x, i, a) => a.indexOf(x) == i);
-        console.log('u-days',uniquedays);
-        var day_of_week = new Date().getDay();
-
-        console.log('maybe', day_of_week);
-
-
-        var sorted_list = uniquedays.slice(day_of_week).concat(list.slice(0,day_of_week));
-        let x= sorted_list.indexOf(a) > sorted_list.indexOf(b); 
-        let sorted = days.sort(function(a,b) {x});
-        console.log('maybe2', sorted);
+        // Get unique weekdays values
+        let weekdays = all_weekdays.filter((x, i, a) => a.indexOf(x) == i);
         
+        // example of sorted array to compare to weekdays already retrieved
+        let sorted = {
+            'Monday':1, 'Tuesday':2, 'Wednesday':3, 'Thursday': 4, 'Friday': 5, 'Saturday':6, 'Sunday':7
+        };
 
-        // const ordered = {};
-        // Object.keys(uniquedays).sort(function (a, b) {
-        //     return moment(a).weekday() > moment(b).weekday();
-        // }).forEach(key=> {
-        //     ordered[key] =uniquedays[key];
-        // });
-        // const d = new Date();
-        // let day = uniquedays[d.getDay()];
-    
-
-        // console.log('ordered', day);
-        // console.log('unique days', uniquedays);
+        // order unique weekdays from Monday
+        weekdays.sort((a, b) => {
+            return [sorted[a] - sorted[b]];
+        });
+        // display weekdays sorted
+        console.log(weekdays);
         
+        // list to hold count
+        let weekday_count = [];
 
-
-        // AVERAGE 
-
-
-        
-
-        // Get the unique values from the age brackets array
-        let uniqueAgeBrackets = allAgeBrackets.filter((x, i, a) => a.indexOf(x) == i).sort();
-        console.log('u-age brackets', uniqueAgeBrackets);
-
-        // Create an array that sums the number of patients for each age bracket based on the selected population
-        // Same nested forEach loop as the line chart
-        let patientCount = [];
-        uniqueAgeBrackets.forEach(age => {
+        // weekday count
+        weekdays.forEach(day => {
 
             // variable to hold counting
             let count = 0;
-            filteredData.forEach(patient => {
-                if (patient.Age_Bracket === age) {
+
+            filteredData.forEach(id => {
+                if (id.Weekday === day) {
                     count += 1;
                 }
             });
-            patientCount.push(count);
-        });
+            weekday_count.push(count);
 
-        // Console log the patient count to ensure accuracy
-        console.log('patient count by age', patientCount);
-        
-        // Create the bar chart
-        let trace2 = [{
-            x: uniqueAgeBrackets.map(id=> `Ages ${id}`),
-            y: patientCount,
+            // *********
+            // PENDING AVERAGE
+            // *********
+        });
+        // Creat the bar chart
+        let trace3 = [{
+            x: weekdays.map(id=> `${id}`),
+            y: weekday_count,
             type: 'bar'
         }];
 
-        // Define the layout for the bar chart
-        let layout2 = {
-            title: `Number of ${selectedPopulation} Patients by Year`,
-            height: 400,
-            width: 800,
-            yaxis: {rangemode: "tozero"}
-        };    
+    // Define the layout for the bar chart
+    let layout3 = {
+        title: `Number of ${selectedPopulation} Patients by Weekday`,
+        height: 400,
+        width: 900,
+        xaxis:{
+            title: 'Weekday'
+        },
+        yaxis: {
+            title: `${selectedPopulation}`,
+            rangemode: 'tozero'}
+    };    
 
-        // display bar chart
-        Plotly.newPlot("bar1", trace2, layout2);
+    // display bar chart
+    Plotly.newPlot("bar2", trace3, layout3);
     });
 };
-
-
 // Initalize the dashboard
 init();
