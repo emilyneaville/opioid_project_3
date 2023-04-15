@@ -103,7 +103,11 @@ function scatter_chart(selectedPopulation) {
             },
             yaxis: {
                 title: `${selectedPopulation}`,
-                rangemode: 'tozero'}
+                rangemode: 'tozero'
+            },
+            colorway: [
+                '#D3B2C4'
+            ]
         };    
         
         // display scatter chart
@@ -151,20 +155,28 @@ function bar_chart(selectedPopulation) {
         let trace2 = [{
             x: uniqueAgeBrackets.map(id=> `${id}`),
             y: patientCount,
-            type: 'bar'
+            type: 'bar',
+            marker: {
+                color: 'rgb(180, 211, 178)',
+                line: {
+                  color: 'rgb(0,128,0)',
+                  width: 1
+                }
+            }
         }];
 
         // Define the layout for the bar chart
         let layout2 = {
             title: `Number of ${selectedPopulation} Patients by Age`,
             height: 400,
-            width: 900,
+            width: 600,
             xaxis:{
                 title: 'Age Bracket'
             },
             yaxis: {
                 title: `${selectedPopulation}`,
-                rangemode: 'tozero'}
+                rangemode: 'tozero'
+            }
         };    
 
         // display bar chart
@@ -217,28 +229,36 @@ function bar_chart2(selectedPopulation) {
             });
             weekday_count.push(count);
 
-            // *********
+            // ***************
             // PENDING AVERAGE
-            // *********
+            // ***************
         });
         // Creat the bar chart
         let trace3 = [{
             x: weekdays.map(id=> `${id}`),
             y: weekday_count,
-            type: 'bar'
+            type: 'bar',
+            marker: {
+                color: 'rgb(192, 178, 211)',
+                line: {
+                    color: 'rgb(128,0,128)',
+                    width: 1
+                }
+            }
         }];
 
     // Define the layout for the bar chart
     let layout3 = {
         title: `Number of ${selectedPopulation} Patients by Weekday`,
         height: 400,
-        width: 900,
+        width: 600,
         xaxis:{
             title: 'Weekday'
         },
         yaxis: {
             title: `${selectedPopulation}`,
-            rangemode: 'tozero'}
+            rangemode: 'tozero'
+        }
     };    
 
     // display bar chart
