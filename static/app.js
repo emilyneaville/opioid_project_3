@@ -9,50 +9,44 @@ function init(){
 
         // Select the dropdown menu
         let dropdownMenu = d3.select("#selDataset");
-        
-        // Console log which dataset is selected
-        // let dataset = dropdownMenu.property("value");
-        // console.log(dataset)
+        let choice= dropdownMenu.property('value');
 
         // Append each unique special population to the dropdown menu
         allPops.forEach((population) => {
             dropdownMenu
                 .append("option")
                 .text(population)
-                .property("value");
+                .choice;
         });
 
+        // student option
+        let student = allPops[3];
+
+        if(choice === 'ASU Student'){
+            scatter_chart(student);
+        }
+        // if(choice === 'Veteran'){
+        //     bar_chart(student);
+        // }
+
     });
-    buildCharts();
 };
 // function when the subject id changes
 function optionChanged(passedvalue) {
 
-    buildCharts(passedvalue);
+    scatter_chart(passedvalue);
     mychart(passedvalue);
 
 };
 
-// Build the charts
-function buildCharts(population) {
+// build scatter chart
+function scatter_chart() {
 
     // Fetch the json data
     d3.json(all_patient_info).then(allData=> {
 
         // Console log the data
-        console.log('all data',allData);
-
-        // Create a bar chart with the age brackets on the x-axis and the amount of patients for each
-        // .map with create an array with every single "Age Bracket" value in the dataset
-        let all_ages = allData.map(data=> {
-            return data["Age Bracket"];
-        });
-
-        // Get the unique values from the Age Bracket
-        let unique_ages = all_ages.filter((x, i, a) => a.indexOf(x) == i).sort();
-
-        // Console log the Unique age bracket values array
-        console.log('u-ages sorted', unique_ages);
+        console.log('all data', allData);
         
         // student -yes count by year from 2017 to 2022
         let stu_17 = allData.filter(take=>take.Student == 'Yes' && take.Year == '2017').length;
@@ -62,6 +56,7 @@ function buildCharts(population) {
         let stu_21 = allData.filter(take=>take.Student == 'Yes' && take.Year == '2021').length;  
         let stu_22 = allData.filter(take=>take.Student == 'Yes' && take.Year == '2022').length;
         let stu_23 = allData.filter(take=>take.Student == 'Yes' && take.Year == '2023').length;
+
         let stu_count_by_year= [stu_17, stu_18,stu_19,stu_20, stu_21,stu_22, stu_23];
         console.log('stu count',stu_count_by_year);
 
@@ -73,38 +68,97 @@ function buildCharts(population) {
         let unique_years = all_years.filter((x, i, a) => a.indexOf(x) == i);
         console.log('u-years',unique_years);
 
-// *******************
-        
-
-        // console.log('yes',yes_students);
-        let yes_veterans = allData.filter(take=>take.Veteran == 'Yes');
-        let yes_homeless = allData.filter(take=>take.Homeless == 'Yes');
-
-        let patients = allData.filter(patient => patient.Spec_Pop == population);
-        console.log('population', patients);
-
-        let x_years = allData[0].Year; // 2017
-        let firstPatient = patients[0];
-        console.log(firstPatient);
-
         // Create the bar chart
         let trace1 = [{
             x: unique_years.map(id=> `Year ${id}`),
             y: stu_count_by_year,
-            orientation: 'v' //vertical
+            orientation: 'v'
         }];
 
         // layout for bar chart
-        let bar_layout = {
+        let layout1 = {
             title: 'Years vs. Yes-Student-Count',
             height: 400,
             width: 800            
         };    
 
         // Render the plot to the div tag with id "bar1"
-        Plotly.newPlot("bar1", trace1, bar_layout);
+        Plotly.newPlot("bar1", trace1, layout1);
     });
 };
+// Build the charts
+// function scatter_chart(students) {
+
+//     // Fetch the json data
+//     d3.json(all_patient_info).then(allData=> {
+
+//         // Console log the data
+//         console.log('all data', allData);
+
+//         // Create a bar chart with the age brackets on the x-axis and the amount of patients for each
+//         // .map with create an array with every single "Age Bracket" value in the dataset
+//         let all_ages = allData.map(data=> {
+//             return data["Age Bracket"];
+//         });
+
+//         // Get the unique values from the Age Bracket
+//         let unique_ages = all_ages.filter((x, i, a) => a.indexOf(x) == i).sort();
+
+//         // Console log the Unique age bracket values array
+//         console.log('u-ages sorted', unique_ages);
+        
+//         // student -yes count by year from 2017 to 2022
+//         let stu_17 = allData.filter(take=>take.Student == 'Yes' && take.Year == '2017').length;
+//         let stu_18 = allData.filter(take=>take.Student == 'Yes' && take.Year == '2018').length;
+//         let stu_19 = allData.filter(take=>take.Student == 'Yes' && take.Year == '2019').length;
+//         let stu_20 = allData.filter(take=>take.Student == 'Yes' && take.Year == '2020').length;
+//         let stu_21 = allData.filter(take=>take.Student == 'Yes' && take.Year == '2021').length;  
+//         let stu_22 = allData.filter(take=>take.Student == 'Yes' && take.Year == '2022').length;
+//         let stu_23 = allData.filter(take=>take.Student == 'Yes' && take.Year == '2023').length;
+//         let stu_count_by_year= [stu_17, stu_18,stu_19,stu_20, stu_21,stu_22, stu_23];
+//         console.log('stu count',stu_count_by_year);
+
+//         let all_years = allData.map(d=> {
+//             return d["Year"];
+//         });
+
+//         // Get the unique values from the Age Bracket
+//         let unique_years = all_years.filter((x, i, a) => a.indexOf(x) == i);
+//         console.log('u-years',unique_years);
+
+// // *******************
+        
+
+//         // console.log('yes',yes_students);
+//         let yes_veterans = allData.filter(take=>take.Veteran == 'Yes');
+//         let yes_homeless = allData.filter(take=>take.Homeless == 'Yes');
+
+//         let patients = allData.filter(patient => patient.Spec_Pop == population);
+//         console.log('population', patients);
+
+//         let x_years = allData[0].Year; // 2017
+//         let firstPatient = patients[0];
+//         console.log(firstPatient);
+
+//         // Create the bar chart
+//         let trace1 = [{
+//             x: unique_years.map(id=> `Year ${id}`),
+//             y: stu_count_by_year,
+//             orientation: 'v' //vertical
+//         }];
+
+//         // layout for bar chart
+//         let bar_layout = {
+//             title: 'Years vs. Yes-Student-Count',
+//             height: 400,
+//             width: 800            
+//         };    
+
+//         // Render the plot to the div tag with id "bar1"
+//         Plotly.newPlot("bar1", trace1, bar_layout);
+//     });
+// };
+
 
 // Call the init function to display the data and the plots to the page
 init();
