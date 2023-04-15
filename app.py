@@ -66,7 +66,7 @@ def patient_info():
     for id, age, weekday, year, gender, spec_pop, student, veteran, homeless in results:
         patients_dict = {
             'id': id,
-            'Age Bracket': age,
+            'Age_Bracket': age,
             'Weekday': weekday,
             'Year': year,
             'Gender': gender,
@@ -95,7 +95,7 @@ def patient_student():
     all_students = []
     for age, weekday, year, spec_pop in results:
         student_dict = {
-            'Age Bracket': age,
+            'Age_Bracket': age,
             'Weekday': weekday,
             'Year': year,
             'Spec_Pop': spec_pop
@@ -120,7 +120,7 @@ def veteran():
     all_veterans = []
     for age, weekday, year, spec_pop in results:
         veteran_dict = {
-            'Age Bracket': age,
+            'Age_Bracket': age,
             'Weekday': weekday,
             'Year': year,
             'Spec_Pop': spec_pop
@@ -145,7 +145,7 @@ def homeless():
     all_homeless = []
     for age, weekday, year, spec_pop in results:
         homeless_dict = {
-            'Age Bracket': age,
+            'Age_Bracket': age,
             'Weekday': weekday,
             'Year': year,
             'Spec_Pop': spec_pop
@@ -170,7 +170,7 @@ def homeless_veteran():
     all_homeless_vets = []
     for age, weekday, year, spec_pop in results:
         homeless_vets_dict = {
-            'Age Bracket': age,
+            'Age_Bracket': age,
             'Weekday': weekday,
             'Year': year,
             'Spec_Pop': spec_pop
@@ -195,7 +195,7 @@ def none_population():
     other_unknown_pop = []
     for age, weekday, year, spec_pop in results:
         other_unknown_pop_dict = {
-            'Age Bracket': age,
+            'Age_Bracket': age,
             'Weekday': weekday,
             'Year': year,
             'Spec_Pop': spec_pop
@@ -217,7 +217,6 @@ def unique_populations():
     
     # Create list of unique special populations
     unique_population = []
-    unique_population.append("All")
     for spec_pop in results:
         spec_pop = spec_pop[0]
         unique_population.append(spec_pop)
