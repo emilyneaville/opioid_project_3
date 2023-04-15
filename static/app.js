@@ -113,7 +113,6 @@ function scatter_chart(selectedPopulation) {
 
 // Build the bar chart function 
 function bar_chart(selectedPopulation) {
-
     // Fetch the json data
     d3.json(all_patient_info).then(allData=> {
 
@@ -153,6 +152,7 @@ function bar_chart(selectedPopulation) {
             y: patientCount,
             type: 'bar'
         }];
+        
 
         // Define the layout for the bar chart
         let layout2 = {
@@ -168,7 +168,7 @@ function bar_chart(selectedPopulation) {
         };    
 
         // display bar chart
-        Plotly.newPlot("bar1", trace2, layout2);
+        Plotly.newPlot('bar1', trace2, layout2);
     });
 };
 
@@ -260,9 +260,44 @@ function bubble_chart(selectedPopulation) {
         };    
 
         // display bar chart
-        Plotly.newPlot("bar1", trace2, layout2);
+        Plotly.newPlot("bar1", trace2, layout2)
     });
 };
+
+
+//**********PIXI STUFF**********
+//******************************
+//******************************
+//******************************
+
+// Create a new application
+/* const app = new PIXI.Application({
+    width: window.innerWidth,
+    height: window.innerHeight,
+    backgroundColor: 0x000000 // Set the background color to black
+});
+
+// Add the renderer to the HTML body
+document.body.appendChild(app.view);
+
+// Add the chart to the application stage
+app.stage.addChild(chart);
+
+// Create a new PIXI.Graphics object for the background
+const bg = new PIXI.Graphics();
+
+// Draw a rectangle to fill the entire screen
+bg.beginFill(0x00ff00); // Set the fill color to green
+bg.drawRect(0, 0, app.screen.width, app.screen.height);
+bg.endFill();
+
+// Add the background to the application
+app.stage.addChild(bg); */
+
+//********END PIXI STUFF********
+//******************************
+//******************************
+//******************************
 
 
 // Initalize the dashboard
