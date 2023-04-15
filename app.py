@@ -51,22 +51,32 @@ def patient_info():
 
     """Return all list of records for all patients (no filtering)"""
     # Query all patients
-    results = session.query(opioid.Age, opioid.Weekday, opioid.Year, opioid.Patient_Gender, opioid.Spec_Pop).all()
+    results = session.query(opioid.OBJECTID, opioid.Age, opioid.Weekday, 
+                            opioid.Year, opioid.Patient_Gender, opioid.Spec_Pop, 
+                            opioid.Patient_ASU, opioid.Patient_Veteran,
+                            opioid.Patient_Homeless).all()
+    
+    id_results= session.query(opioid.OBJECTID).all()
 
     session.close()
 
     # Create list of dictionaries for each patient
     all_patients = []
-    for age, weekday, year, gender, spec_pop in results:
+    
+    for id, age, weekday, year, gender, spec_pop, student, veteran, homeless in results:
         patients_dict = {
+            'id': id,
             'Age Bracket': age,
             'Weekday': weekday,
             'Year': year,
             'Gender': gender,
-            'Spec_Pop': spec_pop
+            'Spec_Pop': spec_pop,
+            'Student': student,
+            'Veteran': veteran,
+            'Homeless': homeless
         }
         all_patients.append(patients_dict)
-
+        
     return jsonify(all_patients)
 
 @app.route("/api/v1.0/patient_ASU")
