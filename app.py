@@ -207,6 +207,7 @@ def unique_populations():
     
     # Create list of unique special populations
     unique_population = []
+    unique_population.append("All")
     for spec_pop in results:
         spec_pop = spec_pop[0]
         unique_population.append(spec_pop)
