@@ -9,7 +9,7 @@ from flask_cors import CORS
 
 # Database Setup
 # Using relative path to connect to the database
-engine = create_engine("sqlite:///Resources/opioid_db_renamed.sqlite")
+engine = create_engine("sqlite:///Resources/opioid_db_cleaned.sqlite")
 
 # reflect an existing database into a new model
 Base = automap_base()
