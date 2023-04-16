@@ -117,7 +117,6 @@ function scatter_chart(selectedPopulation) {
 
 // Build the bar chart function 
 function bar_chart(selectedPopulation) {
-
     // Fetch the json data
     d3.json(all_patient_info).then(allData=> {
 
@@ -164,6 +163,7 @@ function bar_chart(selectedPopulation) {
                 }
             }
         }];
+        
 
         // Define the layout for the bar chart
         let layout2 = {
@@ -180,7 +180,7 @@ function bar_chart(selectedPopulation) {
         };    
 
         // display bar chart
-        Plotly.newPlot("bar1", trace2, layout2);
+        Plotly.newPlot('bar1', trace2, layout2);
     });
 };
 
@@ -265,5 +265,6 @@ function bar_chart2(selectedPopulation) {
     Plotly.newPlot("bar2", trace3, layout3);
     });
 };
+
 // Initalize the dashboard
 init();
