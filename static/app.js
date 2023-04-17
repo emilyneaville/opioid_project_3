@@ -1,3 +1,9 @@
+/* const typography = new Typography({
+  headerFontFamily: ["Open Sans", "sans-serif"],
+  bodyFontFamily: ["Comfortaa", "sans-serif"],
+}); */
+
+
 // URL const variables
 const unique_populations = 'http://127.0.0.1:8000/api/v1.0/unique_populations';
 const all_patient_info = 'http://127.0.0.1:8000/api/v1.0/all_patient_info';
