@@ -7,11 +7,11 @@ function init(){
     // fetch the json data and console log it
     d3.json(unique_populations).then(allPops => {
         
-        // sort dropdown menue options
-        let pops_sorted = allPops.sort();
+        // sort dropdown menu options
+        let popsSorted = allPops.sort();
 
         // display available data to work with
-        console.log('Drowpdown selections', pops_sorted);
+        console.log('Dropdown selections', popsSorted);
 
         // Select the dropdown menu
         let dropdownMenu = d3.select("#selDataset");
@@ -23,23 +23,70 @@ function init(){
                 .text(population)
                 .property("value");
         
-        // Call the buildCharts function
-        scatter_chart(population);
-        bar_chart(population);
-        bar_chart2(population);
+        // Make the dropdown menu selection "Other/Unknown" on page load
+        d3.select("#selDataset").property("value", "Other/Unknown");
+
+        // Initialize the dashboard with the "Other/Unknown" population selected
+        let initialPopulation = allPops[2];
+        lineChart(initialPopulation);
+        barChart(initialPopulation);
+        bar_chart2(initialPopulation);
+        buildPopulationInfo(initialPopulation);
+
         });
     });
 };
 
+// Build the Population Information panel
+function buildPopulationInfo(selectedPopulation) {
+
+    // Fetch the json data
+    d3.json(all_patient_info).then(allData=> {
+
+        // Filter the data based on the selected population
+        let filteredData = allData.filter(data => data.Spec_Pop === selectedPopulation);
+
+        // Clear the panel before appending new data
+        d3.select("#population-info").html("");
+
+        // Total the number of patients for the selected population
+        let totalPatients = filteredData.length;
+        console.log('total patients', totalPatients);
+
+        // Append the total number of patients to the panel
+        d3.select("#population-info")
+            .append("h4")
+            .text(`Total: ${totalPatients}`);
+
+        // Total the number of female and male patients for the selected population
+        let totalFemales = filteredData.filter(data => data.Gender === "Female").length;
+        let totalMales = filteredData.filter(data => data.Gender === "Male").length;
+
+        // Find the percentage of males and females using totalPatients, totalFemales, and totalMales
+        let pctMales = ((totalMales / totalPatients) * 100).toFixed(2);
+        let pctFemales = ((totalFemales / totalPatients) * 100).toFixed(2);
+
+        // Append the total number of female and male patients to the panel
+        d3.select("#population-info")
+            .append("h5")
+            .text(`Males: ${totalMales} (${pctMales}%)`);
+        d3.select("#population-info")
+            .append("h5")
+            .text(`Females: ${totalFemales} (${pctFemales}%)`);
+
+    });
+};      
+
 // Function that updates the dashboard based on the dropdown menu selection
 function optionChanged(passedvalue) {
-    scatter_chart(passedvalue);
-    bar_chart(passedvalue);
+    lineChart(passedvalue);
+    barChart(passedvalue);
     bar_chart2(passedvalue);
+    buildPopulationInfo(passedvalue);
 };
 
 // Build the line chart function 
-function scatter_chart(selectedPopulation) {
+function lineChart(selectedPopulation) {
 
     // Fetch the json data
     d3.json(all_patient_info).then(allData=> {
@@ -99,10 +146,9 @@ function scatter_chart(selectedPopulation) {
             height: 400,
             width: 800,
             xaxis:{
-                title: 'Years'
+                title: 'Year'
             },
             yaxis: {
-                title: `${selectedPopulation}`,
                 rangemode: 'tozero'
             },
             colorway: [
@@ -110,13 +156,14 @@ function scatter_chart(selectedPopulation) {
             ]
         };    
         
-        // display scatter chart
+        // display line chart
         Plotly.newPlot("line", trace1, layout1);
     });
 };
 
 // Build the bar chart function 
-function bar_chart(selectedPopulation) {
+function barChart(selectedPopulation) {
+
     // Fetch the json data
     d3.json(all_patient_info).then(allData=> {
 
@@ -174,7 +221,6 @@ function bar_chart(selectedPopulation) {
                 title: 'Age Bracket'
             },
             yaxis: {
-                title: `${selectedPopulation}`,
                 rangemode: 'tozero'
             }
         };    
@@ -194,12 +240,12 @@ function bar_chart2(selectedPopulation) {
         let filteredData = allData.filter(data => data.Spec_Pop === selectedPopulation);
         
         // get all days weekdays
-        let all_weekdays = filteredData.map(data => {
+        let allWeekdays = filteredData.map(data => {
             return data.Weekday;
         });
 
         // Get unique weekdays values
-        let weekdays = all_weekdays.filter((x, i, a) => a.indexOf(x) == i);
+        let weekdays = allWeekdays.filter((x, i, a) => a.indexOf(x) == i);
         
         // example of sorted array to compare to weekdays already retrieved
         let sorted = {
@@ -229,9 +275,6 @@ function bar_chart2(selectedPopulation) {
             });
             weekday_count.push(count);
 
-            // ***************
-            // PENDING AVERAGE
-            // ***************
         });
         // Creat the bar chart
         let trace3 = [{
@@ -255,11 +298,7 @@ function bar_chart2(selectedPopulation) {
         xaxis:{
             title: 'Weekday'
         },
-        yaxis: {
-            title: `${selectedPopulation}`,
-            rangemode: 'tozero'
-        }
-    };    
+    };
 
     // display bar chart
     Plotly.newPlot("bar2", trace3, layout3);
