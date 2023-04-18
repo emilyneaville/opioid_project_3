@@ -33,15 +33,17 @@
       </div>
     </div>
     <div class="row">
-      <a href="https://catalog.data.gov/dataset/opioid-ems-calls-ac2fc">Link to Opioid EMS Calls (DATA.gov)</a>
-            
+    </div>
+    
+    <div class="row">
+  
       <!-- dropdown selection/button -->
       <div class="col-md-3">
         <div class="well">
           <h5>Population Selection:</h5>
           <select id="selDataset" onchange="optionChanged(this.value)"></select>
         </div>
-        
+
         <!-- Population information -->
         <div class="panel panel-primary">
           <div class="panel-heading">
@@ -52,45 +54,90 @@
       </div>
 
       <!-- class for scatter chart -->
-      <div class="col-md-6">
+      <div class="col-md-5">
         <div id="line"></div>
       </div>
      
     </div>
 
     <!-- row for bar charts -->
-    <div class="row">
-      <div class="col-md-6">
+    <div class="row-chart">
+      <div class="col-md-5">
         <div id="bar1"></div>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-5">
         <div id="bar2"></div>
       </div>
     </div>
 
+    <!-- row spaces for between the charts and the footer-->
+    <div class="row">
+    </div>
+    <div class="row">
+    </div>
+    <div class="row">
+    </div>
+    <div class="row">
+    </div>
+    <div class="row">
+      
+    </div>
+
     <!-- footer -->
     <footer>
-      <p>Team Members: Katie Bienek, Jhazmine Billups, Candida Miranda, Emily Neaville.</p>
-      <p><a href="https://github.com/emilyneaville/opioid_project_3">Github Repository </a></p>
+      <p>Team Members: Katie Bienek, Jhazmine Billups, Candida Miranda, and Emily Neaville.</p>
+      <img src="images/github logo.png" width = "25"/>
+      <a href="https://github.com/emilyneaville/opioid_project_3">Github Repository </a></p>
+      <img src="images/data.gov.png" width = "110"/>
+      <a href="https://catalog.data.gov/dataset/opioid-ems-calls-ac2fc">Opioid EMS Calls</a>
     </footer>
+    <div class="row">
+    </div>
 
   </div>
 
   <style>
-    .well {
-      width: 70%;
-      padding: 15px;
+
+    .col-md-3 {
+      margin-top: 10%;
+      width: 20%;
+      height: 20%;
+      align-items: center;
+
     }
+    .well {
+      width: 330px;
+      padding: 20px;
+      align-self: center;
+    }
+    .col-md-3 {
+      margin-left: 100px;
+      margin-right: 100px;
+      width: 20%;
+
+    }
+    .row-chart {
+      margin-left: 180px;
+      width: 110%;
+      
+    }
+
     .row {
       width: 100%;
       padding: 20px;
+      
     }
+
+    .container{
+    width: 100%;
+    }
+  
   </style>
 
   <script src="https://d3js.org/d3.v5.min.js"></script>
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
   <script src="static/app.js"></script>
-  <!-- <script type="module" src="C:/Users/kfbie/OneDrive/Desktop/opioid_project_3/static/script.js"></script> --> -->
+  <!-- <script type="module" src="C:/Users/kfbie/OneDrive/Desktop/opioid_project_3/static/script.js"></script> -->
  
 
 </body>
