@@ -1,4 +1,8 @@
-import Typography from "typography";
-import moragaTheme from "typography-theme-moraga";
-const typography = new Typography(moragaTheme);
-typography.injectStyles();
+import Typography from 'typography';
+import theme from 'typography-theme-fairy-gates';
+
+const typography = new Typography(theme);
+
+typography.injectStyles(theme);
+
+

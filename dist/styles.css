@@ -1,0 +1,83 @@
+/* Import typography.js and its corresponding theme */
+
+@import url("https://fonts.googleapis.com/css2?family=Phudu:wght@300;400&display=swap");
+
+@import url('https://unpkg.com/@rhymes/typography-theme-wordpress-2016@0.16.0/dist/typography-theme-wordpress-2016.css');
+
+/* Set the body font family */
+
+body {
+  font-family: 'Phudu', sans-serif;
+}
+
+/* Style the h1 heading using the headingStyle object from typography.js */
+
+h1 {
+  font-size: 4rem;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  font-weight: 700;
+}
+
+/* Style the p paragraph using the bodyStyle object from typography.js */
+
+p {
+  font-size: 1.6rem;
+  line-height: 1.6;
+  margin-top: 0;
+  margin-bottom: 1.6rem;
+  font-weight: 400;
+}
+
+/* Style the jumbotron using the jumbotronStyle object */
+
+.jumbotron {
+  background: #E8DED1 ;
+  overflow: auto;
+  width: 100%;
+  height: 100%;
+  margin: 10px;
+  padding: 0;
+
+  /* Use the jumbotronStyle object from typography.js to style the h1 heading in the jumbotron */
+  h1 {
+    font-family: 'Phudu', sans-serif;
+    font-weight: 700;
+    font-size: 3.75rem;
+    line-height: 1.1;
+    margin-top: 0;
+    margin-bottom: 20px;
+  }
+}
+
+/* Remove the inline styles */
+.jumbotron {
+    margin: 10px;
+    padding: 0;
+  }
+  
+ /* Add the class names and style them with Typography.js */
+  .container {
+    font-family: ${typography.options.bodyFontFamily.join(', ')};
+    font-size: ${typography.options.baseFontSize};
+  }
+  
+  .jumbotron {
+    background: ${typography.options.overrideStyles.Global.jumbotron.backgroundColor};
+  }
+  
+  /* Add class name to the elements */
+  .well {
+    width: 70%;
+    padding: 15px;
+  }
+  
+  .row {
+    width: 100%;
+    padding: 20px;
+  }
+
+  
+   
