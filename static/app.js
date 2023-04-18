@@ -143,11 +143,8 @@ function lineChart(selectedPopulation) {
         // Define the layout for the line chart
         let layout1 = {
             title: `Number of ${selectedPopulation} Patients by Year`,
-            height: 400,
-            width: 800,
-            xaxis:{
-                title: 'Year'
-            },
+            height: 500,
+            width: 900,
             yaxis: {
                 rangemode: 'tozero'
             },
@@ -215,11 +212,8 @@ function barChart(selectedPopulation) {
         // Define the layout for the bar chart
         let layout2 = {
             title: `Number of ${selectedPopulation} Patients by Age`,
-            height: 400,
-            width: 600,
-            xaxis:{
-                title: 'Age Bracket'
-            },
+            height: 500,
+            width: 800,
             yaxis: {
                 rangemode: 'tozero'
             }
@@ -293,11 +287,8 @@ function bar_chart2(selectedPopulation) {
     // Define the layout for the bar chart
     let layout3 = {
         title: `Number of ${selectedPopulation} Patients by Weekday`,
-        height: 400,
-        width: 600,
-        xaxis:{
-            title: 'Weekday'
-        },
+        height: 500,
+        width: 800,
     };
 
     // display bar chart
