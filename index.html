@@ -7,7 +7,7 @@
   <link href="/favicon.ico" type="image/x-icon" rel="icon" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title class="bg-blue-500">Opioid Project</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link href="dist/styles.css" rel="stylesheet">
 
   <style>
@@ -36,9 +36,8 @@
     </div>
     
     <div class="row">
-  
-      <!-- dropdown selection/button -->
       <div class="col-md-3">
+        <!-- dropdown selection/button -->
         <div class="well">
           <h5>Population Selection:</h5>
           <select id="selDataset" onchange="optionChanged(this.value)"></select>
@@ -51,6 +50,13 @@
           </div>
           <div id="population-info" class="panel-body"></div>
         </div>
+
+        <!-- Button for more info -->
+        <button class="popup" onclick="myFunction()">show/hide information 
+          <span class="popuptext" id="myPopup">The dashboard plots incidents in which the call to the Tempe's
+            Fire Medical Rescue Department was deemed as "opioid abuse probable."
+          </span>
+        </button>
       </div>
 
       <!-- class for scatter chart -->
@@ -99,14 +105,14 @@
   <style>
 
     .col-md-3 {
-      margin-top: 10%;
+      margin-top: 0%;
       width: 20%;
       height: 20%;
       align-items: center;
 
     }
     .well {
-      width: 330px;
+      width: auto;
       padding: 20px;
       align-self: center;
     }
@@ -114,6 +120,7 @@
       margin-left: 100px;
       margin-right: 100px;
       width: 20%;
+      height: 50%;
 
     }
     .row-chart {
@@ -131,12 +138,64 @@
     .container{
     width: 100%;
     }
+
+    /* Popup container */
+    .popup {
+      position: absolute;
+      display: inline-block;
+      cursor: pointer;
+      left: auto;
+      top: -15%;
+      width: auto;
+      height: auto;
+    }
+
+    /* The actual popup */
+    .popup .popuptext {
+      visibility: hidden;
+      width: 300px;
+      background-color: #2e2e2e;
+      color: #fff;
+      text-align: left;
+      border-radius: 6px;
+      padding: 10px;
+      position: absolute;
+      z-index: 1;
+      top: 1000%;
+      right: -90%;
+      margin-left: 100px;
+    }
+
+    /* Toggle this class when clicking on the popup container (hide and show the popup) */
+    .popup .show {
+      visibility: visible;
+      -webkit-animation: fadeIn 0.5s;
+      animation: fadeIn 0.5s
+    }
+
+    /* Add animation (fade in the popup) */
+    @-webkit-keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity:1 ;}
+    }
   
   </style>
 
   <script src="https://d3js.org/d3.v5.min.js"></script>
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
   <script src="static/app.js"></script>
+  <script>
+    // When the user clicks on <div>, open the popup
+    function myFunction() {
+      var popup = document.getElementById("myPopup");
+      popup.classList.toggle("show");
+    }
+  </script>
 
 </body>
 
