@@ -1,5 +1,7 @@
-# **OPIOID PROJECT** 
-## Project 3
+# **OPIOID USE ANALYSIS** 
+### Project 3
+---
+Our team is investigating the use of opioids in the city of Tempe. For this project, we are analyzing the City of Tempe's [Opioid EMS Calls](https://catalog.data.gov/dataset/opioid-ems-calls-ac2fc) dataset. In order to fight the opioid abuse epidemic, the right strategies must be employed in order to focus efforts on the people who need it most. This analysis aims to create insights on the different demographics in Tempe that are being affected by the opioid abuse. While the City of Tempe does provide plenty of resources [information on opioid abuse](https://tempegov.maps.arcgis.com/apps/MapJournal/index.html?appid=c40206ce59a4442a8bc49bcfe6637b8f), our aim is to aid the City of Tempe and it's different initiatives will be able to more accurately assess which population may need to most help, allowing them to build the most effective programs.
 
 
 
