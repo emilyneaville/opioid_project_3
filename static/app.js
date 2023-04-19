@@ -142,7 +142,7 @@ function lineChart(selectedPopulation) {
 
         // Define the layout for the line chart
         let layout1 = {
-            title: `Number of ${selectedPopulation} Patients by Year`,
+            title: `Count of ${selectedPopulation} Patients by Year`,
             height: 500,
             width: 900,
             yaxis: {
@@ -211,7 +211,7 @@ function barChart(selectedPopulation) {
 
         // Define the layout for the bar chart
         let layout2 = {
-            title: `Number of ${selectedPopulation} Patients by Age`,
+            title: `Count of ${selectedPopulation} Patients by Age`,
             height: 500,
             width: 800,
             yaxis: {
@@ -286,7 +286,7 @@ function bar_chart2(selectedPopulation) {
 
     // Define the layout for the bar chart
     let layout3 = {
-        title: `Number of ${selectedPopulation} Patients by Weekday`,
+        title: `Count of ${selectedPopulation} Patients by Weekday`,
         height: 500,
         width: 800,
     };
