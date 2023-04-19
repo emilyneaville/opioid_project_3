@@ -32,9 +32,9 @@ Here is our first visualization which shows the count of patients that the Emerg
 
 
 
-Here is our visualization which shows the aggregate count of patients that the EMS received opioid related calls about on specific days of the week 
+Here is our visualization which shows the aggregate count of patients that the EMS received opioid related calls about on specific days of the week:
 ![Bar Chart](https://github.com/emilyneaville/opioid_project_3/blob/main/images/greenbar.PNG)
 
-Lastly, this is our visualization that shows the aggregate of the count of patients that fell into specific age ranges
+Lastly, this is our visualization that shows the aggregate of the count of patients that fell into specific age ranges:
 ![Bar Chart](https://github.com/emilyneaville/opioid_project_3/blob/main/images/purplebar.PNG)
 
