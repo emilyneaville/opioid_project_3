@@ -28,8 +28,8 @@
     <!-- jumbotron-->
     <div class="row">
       <div class="col-md-20 jumbotron text-center">
-        <h1 >Opioid Project</h1>
-        <p>Use the interactive charts below to explore the dataset</p>
+        <h1>Opioid Abuse in the City of Tempe</h1>
+        <p>Use the dropdown menu to explore the dataset</p>
       </div>
     </div>
     
@@ -189,7 +189,7 @@
       margin-left: 100px;
     }
 
-    /* Toggle this class when clicking on the popup container (hide and show the popup) */
+    /* Hide and show the popup */
     .popup .show {
       visibility: visible;
       -webkit-animation: fadeIn 0.5s;
@@ -206,6 +206,21 @@
       from {opacity: 0;}
       to {opacity:1 ;}
     }
+
+    /* giving style to the popup*/
+    .popup {
+      color: #000000;      
+      background-color: #E8DED1;
+      border-radius: 5px;
+      transition: all 0.3s;
+    }
+    
+    .popup:hover {
+      transform: translateY(-10px);
+      background-color: #cad3d4;
+      color: #000000;
+    }
+
     .scatter-chart {
       margin-left: 170px;
       width: 110%;
