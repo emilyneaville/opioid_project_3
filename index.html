@@ -53,8 +53,11 @@
 
         <!-- Button for more info -->
         <button class="popup" onclick="myFunction()">show/hide information 
-          <span class="popuptext" id="myPopup">The dashboard plots incidents in which the call to the Tempe's
-            Fire Medical Rescue Department was deemed as "opioid abuse probable."
+          <span class="popuptext" id="myPopup">This dashboard aims to provide further insight on how the
+            opioid abuse epidemic affects certain demographic populations in the City of Tempe.<br>
+            The data represents "opioid abuse probable" calls to emergency services, meaning
+            each patient was deemed to have been affected by opioid abuse.<br>
+            <a href="https://gis.tempe.gov/publicart/tempopendata/opioid_epidemic/opioid_data_transformation_notes_.pdf">Data dictionary</a>
           </span>
         </button>
       </div>
@@ -103,7 +106,7 @@
   </div>
 
   <style>
-
+    
     .col-md-3 {
       margin-top: 10%;
       width: 20%;
@@ -111,17 +114,39 @@
       align-items: center;
 
     }
+
     .well {
       width: 330px;
       padding: 20px;
       align-self: center;
     }
+
     .col-md-3 {
       margin-left: 100px;
       margin-right: 100px;
       width: 20%;
-
     }
+
+    .panel-primary {
+      width: 330px;
+      padding: 0px;
+      align-self: center;
+      border-color: #2e2e2e
+    }
+
+    .panel-primary>.panel-heading {
+      background-color: #E8DED1;
+      border-color: #2e2e2e;
+      text-align: left;
+      font-size: 20px;
+      font-weight: bold;
+      padding: 10px;
+    }
+
+    .panel-primary>.panel-heading>.panel-title {
+      color: #2e2e2e;
+    }
+    
     .row-chart {
       margin-left: 180px;
       width: 110%;
@@ -131,7 +156,6 @@
     .row {
       width: 100%;
       padding: 20px;
-      
     }
 
     .container{
@@ -152,16 +176,17 @@
     /* The actual popup */
     .popup .popuptext {
       visibility: hidden;
-      width: 300px;
+      width: 550px;
       background-color: #2e2e2e;
       color: #fff;
+      font-size: large;
       text-align: left;
       border-radius: 6px;
       padding: 10px;
       position: absolute;
       z-index: 1;
-      top: 1600%;
-      right: -90%;
+      bottom: 350%;
+      right: -250%;
       margin-left: 100px;
     }
 
