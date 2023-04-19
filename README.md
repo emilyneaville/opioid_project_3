@@ -22,3 +22,17 @@ Non-Federal: This dataset is covered by different Terms of Use than Data.gov. [S
 License: [Creative Commons Attribution](http://opendefinition.org/licenses/cc-by)
 
 ![Data.gov](images/data.gov.png)
+
+
+From the data we gathered we created visualizations based upon the number of patients that the Emergency Medical Services (EMS) received opioid related calls about each year, the aggregate number of patients that the EMS received opioid related calls about on specific days of the week, and the aggregate of the number of patients that fell into specific age ranges. The time period in which this data was collected was from January 2017 through January 2023. When toggling the dropdown menu shown in the first picture below, visitors of our page can see how these metrics change based upon specific population subsets.
+
+Here is our first visualization which shows the number of patients that the Emergency Medical Services (EMS) received opioid related calls about by year:
+
+['Line Graph'](images/linegraph.png)
+
+Here is our visualization which shows the aggregate number of patients that the EMS received opioid related calls about on specific days of the week 
+['Bar Chart'](images/greenbar.png)
+
+Lastly, this is our visualization that shows the aggregate of the number of patients that fell into specific age ranges
+['Bar Chart'](images/purplebar.png)
+
