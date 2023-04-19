@@ -28,11 +28,11 @@ From the data we gathered we created visualizations based upon the number of pat
 
 Here is our first visualization which shows the number of patients that the Emergency Medical Services (EMS) received opioid related calls about by year:
 
-['Line Graph'](images/linegraph.png)
+!['Line Graph'](images/linegraph.png)
 
 Here is our visualization which shows the aggregate number of patients that the EMS received opioid related calls about on specific days of the week 
-['Bar Chart'](images/greenbar.png)
+!['Bar Chart'](images/greenbar.png)
 
 Lastly, this is our visualization that shows the aggregate of the number of patients that fell into specific age ranges
-['Bar Chart'](images/purplebar.png)
+!['Bar Chart'](images/purplebar.png)
 
