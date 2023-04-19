@@ -32,8 +32,6 @@
         <p>Use the interactive charts below to explore the dataset</p>
       </div>
     </div>
-    <div class="row">
-    </div>
     
     <div class="row">
       <div class="col-md-3">
@@ -64,7 +62,9 @@
 
       <!-- class for scatter chart -->
       <div class="col-md-5">
-        <div id="line"></div>
+        <div class = 'scatter-chart'>
+          <div id="line"></div>
+        </div>
       </div>
      
     </div>
@@ -72,10 +72,14 @@
     <!-- row for bar charts -->
     <div class="row-chart">
       <div class="col-md-5">
-        <div id="bar1"></div>
+        <div class = first-bar>
+          <div id="bar1"></div>
+        </div>
       </div>
       <div class="col-md-5">
-        <div id="bar2"></div>
+        <div class = 'second-bar'>
+          <div id="bar2"></div>
+        </div>
       </div>
     </div>
 
@@ -108,23 +112,18 @@
   <style>
     
     .col-md-3 {
-      margin-top: 10%;
+      margin-top: 5%;
       width: 20%;
       height: 20%;
       align-items: center;
-
+      margin-left: 250px;
+      width: auto;
     }
 
     .well {
       width: 330px;
       padding: 20px;
       align-self: center;
-    }
-
-    .col-md-3 {
-      margin-left: 100px;
-      margin-right: 100px;
-      width: 20%;
     }
 
     .panel-primary {
@@ -158,7 +157,7 @@
       padding: 20px;
     }
 
-    .container{
+    .container {
     width: 100%;
     }
 
@@ -206,6 +205,19 @@
     @keyframes fadeIn {
       from {opacity: 0;}
       to {opacity:1 ;}
+    }
+    .scatter-chart {
+      margin-left: 170px;
+      width: 110%;
+    }
+
+    .first-bar {
+      margin-left: 150px;
+      width: 110%;
+    }
+    .second-bar {
+      margin-left: 50px;
+      width: 110%;
     }
   
   </style>
