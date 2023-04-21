@@ -35,7 +35,7 @@ License: [Creative Commons Attribution](http://opendefinition.org/licenses/cc-by
 
 ![Data.gov](images/data.gov.png)
 
-##### References and Resources
+#### References and Resources
 ---
 [Tailwind CSS](https://tailwindcss.com/)
 
