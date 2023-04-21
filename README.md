@@ -38,5 +38,7 @@ License: [Creative Commons Attribution](http://opendefinition.org/licenses/cc-by
 ##### References and Resources
 ---
 [Tailwind CSS](https://tailwindcss.com/)
+
 [How to make a button popup in Javascript](https://www.w3schools.com/howto/howto_js_popup.asp)
+
 [Plotly layouts](https://plotly.com/javascript/reference/layout/xaxis/)
